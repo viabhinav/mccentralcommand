@@ -12,7 +12,6 @@ class discordItem:
 
 #itroot = itemconn.root()
 def inx():
-    
 
     phreakbox = discordItem("The Phreakbox", "A super phreak in a box lol", 100000, "phreakbox")
     pepecrown = discordItem("Pepe Crown", "The antique crown of the Pepe King",1,"pepec")

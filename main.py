@@ -26,7 +26,6 @@ for x in itroot['items']:
     itroot[x.keyword]={}
 
 client = discord.Client()
-token = "ODMzOTU1ODk5MzgyMTY5NjMw.YH539A.61zqE2qmwUbHqu_CexHDgfI5_dw"
 async def respond(message, resmsg, sendmsg):
     if resmsg in message.content.lower():
         await message.channel.send(sendmsg)
@@ -38,7 +37,6 @@ async def ownernotif(message):
 @cmd.command()     
 async def checkBal(message, user, name):
     print(db.get(str(user)))
-    pinf = db.get(str(user))
     if (db.get(str(user))==False):
         embedx = discord.Embed(title="Welcome to the Bank, "+str(name), description="Balance is now 500 dollars")
         await message.channel.send(embed=embedx)
@@ -195,4 +193,4 @@ async def on_message(message):
     if message.content.lower() == "x flex pepec":
         await flex(message, "pepec")
 
-client.run(token)
+client.run("ODMzOTU1ODk5MzgyMTY5NjMw.YH539A.61zqE2qmwUbHqu_CexHDgfI5_dw", bot="true")
