@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands as cmd
+from discord.ext import commands
 import pickledb as dbms
 from random import randint as rand
 import ZODB
@@ -17,7 +17,7 @@ print (itemconn.root)
 db = dbms.load('playersbal.json', True)
 pepec = dbms.load('pepec.json', True)
 itroot = itemconn.root()
-bot = cmd.Bot(command_prefix='#')
+bot = commands.Bot(command_prefix='#')
 
 transaction.commit()
 print(itroot)
@@ -34,7 +34,7 @@ async def emb(message,title,desc):
 async def ownernotif(message):
     owner = await client.fetch_user(642390951008010268)
     await owner.send(message)
-@cmd.command()     
+@bot.command()     
 async def checkBal(message, user, name):
     print(db.get(str(user)))
     if (db.get(str(user))==False):
@@ -44,7 +44,6 @@ async def checkBal(message, user, name):
     else:
         embedx = discord.Embed(title="Balance of user "+ str(name), description="Balance of user is **"+str(db.get(str(user)))+"**")
         await message.channel.send(embed=embedx)
-bot.add_command(checkBal)
 async def earn(message, amount):
     amc = int(db.get(str(message.author.id))) + amount
     db.set(str(message.author.id), amc)
@@ -142,55 +141,5 @@ async def on_message(message):
   
     if message.author == client.user:
         return
-    if 'happy birthday' in message.content.lower():
-        await message.channel.send('Happy Birthday! 🎈🎉')
-    if '!createserver' in message.content.lower():
-        await message.channel.send('Ok, please tell me the name if da server!')
-    await respond(message, "hi", "hi")
-    await respond(message, "how are you", "We are fine!")
-    await respond(message, "xls bal", "bal: inf")
-    if (message.content.lower()).startswith("x bal"):
-        try:
-            userxy = message.content.split()
-            userx = userxy[2]
-            userx = userx.replace('<', '')
-            userx = userx.replace('>','')
-            userx=userx.replace('@','')
-            userx=userx.replace('!','')
-            ux = userx.strip()
-            print(ux)
-            print(await client.fetch_user(ux))
-            await checkBal(message, str(ux), (await client.fetch_user(ux)))
-        except Exception as e:
-            print(e)
-            await checkBal(message, str(message.author.id), str(message.author))
-    if message.content.lower()== 'x beg':
-        earnamc = rand(100, 1000)
-        await message.channel.send(embed=discord.Embed(title="Yo beggar!", description="Yo begged and got **" + str(earnamc) + "**"))
-        await earn(message, earnamc)
-    await respond(message, "lets fart", "Sorry outta gas now")
-    mcx = message.content.lower()
-    print(mcx)
-    mcs = mcx.split()
-    print(mcs)
-    if (message.content.lower()).startswith("x rob"):
-        x = message.content.split()
-        user = x[2].replace('<', '')
-        user = user.replace('>','')
-        user=user.replace('@','')
-        user=user.replace('!','')
-        u = user.strip()
-        await rob(message, u)
-    if message.content.lower()=='x items':
-        await printItems(message)
-    if message.content.lower() == 'x inv':
-        await inventory(message)
-    if (message.content.lower()).startswith('x buy'):
-        x = message.content.split()
-        await buyItem(message, x[2], int(x[3]))
-    if message.content.lower() == "x use pepec" :
-        await flex(message,"pepec")
-    if message.content.lower() == "x flex pepec":
-        await flex(message, "pepec")
 
 client.run("ODMzOTU1ODk5MzgyMTY5NjMw.YH539A.61zqE2qmwUbHqu_CexHDgfI5_dw", bot="true")

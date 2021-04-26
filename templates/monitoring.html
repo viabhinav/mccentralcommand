@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h1>{% block title %} Welcome to Monitoring {% endblock %}</h1>
+    <br>
+    <br>
+    <h3>Player Balance</h3>
+    <table>
+    <tr>
+    <th>Player ID</th>
+    <th>Balance</th>
+    <th>Country</th>
+    </tr>
+    {% for bal in balance %}
+        <tr>
+          <td>{{balance[bal]}}</td>
+          <td>{{bal}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+{% block heading %}
+    MCCentralCommand dashboard
+{% endblock %}
+{% block item1 %}
+    Monitoring
+{% endblock %}
+{% block item1href %}
+    "#"
+{% endblock %}
