@@ -1,2 +1,2 @@
 # mccentralcommand
-This is a repository for the bot. About 120 commits couldnt be imported, sry :(
+This is a bot, which is being written from scratch by me. Sorry for bad practices :(
