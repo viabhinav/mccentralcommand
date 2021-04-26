@@ -1,0 +1,6 @@
+discord
+discord.py
+pickledb
+zodb
+transaction
+flask
