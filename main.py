@@ -50,7 +50,15 @@ bot.add_command(checkBal)
 async def earn(message, amount):
     amc = int(db.get(str(message.author.id))) + amount
     db.set(str(message.author.id), amc)
-    
+async def flex(message, item):
+    try:
+        flex = discord.Embed(title=str(message.author)+''+" is flexing their pepe crowns!", description="They have "+str(itroot['pepec'][str(message.author.id)])+" of them, what a loser!")
+        await message.channel.send(embed=flex)
+        await message.author.dm_channel.send("Dont flex bro")
+    except Exception as e:
+        await message.channel.send("You dont have the item lol!")
+        await ownernotif(str(e))
+        print(e)
 async def rob(message, u=''):
     if (u==''):
         await message.channel.send(embed=discord.Embed(title="Are ye mad?", description="Mention someone to rob!"))
@@ -182,5 +190,9 @@ async def on_message(message):
     if (message.content.lower()).startswith('x buy'):
         x = message.content.split()
         await buyItem(message, x[2], int(x[3]))
+    if message.content.lower() == "x use pepec" :
+        await flex(message,"pepec")
+    if message.content.lower() == "x flex pepec":
+        await flex(message, "pepec")
 
 client.run(token)
