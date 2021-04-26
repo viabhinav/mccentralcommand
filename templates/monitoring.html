@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
+{% block scripts %}
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+{% endblock %}
+
 {% block content %}
+    
     <br>
     <h1>{% block title %} Welcome to Monitoring {% endblock %}</h1>
     <br>
@@ -10,15 +16,36 @@
     <tr>
     <th>Player ID</th>
     <th>Balance</th>
-    <th>Country</th>
     </tr>
     {% for bal in balance %}
         <tr>
-          <td>{{balance[bal]}}</td>
           <td>{{bal}}</td>
+          <td>{{balance[bal]}}</td>
         </tr>
     {% endfor %}
     </table>
+    
+    <br><br><br>
+    <div id="container" style="width: 25%; height: 25%"></div>
+    <script>
+      var data = [
+      {% for bal in balance %}
+    {x: {{bal}}, value: {{balance[bal]}}},
+      {% endfor %}
+    {x: "Others", value: 0}
+    ];
+    var chart = anychart.pie();
+
+  // set the chart title
+  chart.title("See Pie Analytics");
+
+  // add the data
+  chart.data(data);
+
+  // display the chart in the container
+  chart.container('container');
+  chart.draw();
+    </script>
 {% endblock %}
 {% block heading %}
     MCCentralCommand dashboard

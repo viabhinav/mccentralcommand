@@ -2,6 +2,9 @@ from flask import Flask, render_template
 from threading import Thread
 import pickledb as dbms
 from werkzeug.exceptions import abort
+import discord
+
+d = discord.Client()
 
 db = dbms.load("playerbal.json", True)
 
@@ -14,16 +17,19 @@ def getdbitems(db):
         dx[i] = db.get(str(i))
     return dx
 
+async def getPlayerName(id):
+    return str(await d.fetch_user(int(id)))
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/<int:player_id>')
+@app.route('/info/<int:player_id>')
 def playerbal(player_id):
     if(str(db.get(str(player_id))) == 'False'):
         abort(404)
     else:
-        return render_template('playerbal.html', balance=(db.get(str(player_id))))
+        return render_template('playerbal.html', balance=(db.get(str(player_id))), name=getPlayerName(int(player_id)))
 
 @app.route('/monitoring')
 def monitoring():

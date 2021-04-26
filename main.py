@@ -26,6 +26,9 @@ for x in itroot['items']:
     itroot[x.keyword]={}
 
 client = discord.Client()
+async def getuser(id):
+    x = await client.fetch_user(int(id))
+    return x
 async def respond(message, resmsg, sendmsg):
     if resmsg in message.content.lower():
         await message.channel.send(sendmsg)
@@ -135,6 +138,7 @@ async def inventory(message):
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
     await ownernotif("Online! :thumbs_up:")
+    print(await getuser(270904126974590976))
 
 @client.event
 async def on_message(message):
