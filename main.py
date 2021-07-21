@@ -37,7 +37,7 @@ async def emb(message,title,desc):
 async def ownernotif(message):
     owner = await client.fetch_user(642390951008010268)
     await owner.send(message)
-@bot.command()     
+@bot.command()
 async def checkBal(message, user, name):
     print(db.get(str(user)))
     if (db.get(str(user))==False):
@@ -145,5 +145,4 @@ async def on_message(message):
   
     if message.author == client.user:
         return
-
-client.run("ODMzOTU1ODk5MzgyMTY5NjMw.YH539A.61zqE2qmwUbHqu_CexHDgfI5_dw", bot="true")
+bot.run("ODMzOTU1ODk5MzgyMTY5NjMw.YH539A.61zqE2qmwUbHqu_CexHDgfI5_dw", bot="true")
